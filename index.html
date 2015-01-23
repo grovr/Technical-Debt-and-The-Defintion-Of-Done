@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Technical Debt - An Interest-ing Topic</title>
+
+		<meta name="description" content="A talk about Technical Debt">
+		<meta name="author" content="Matthew Grover">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Technical Debt</h1>
+					<h2>An Interest-ing Topic</h2>
+					<p>
+						<small>( ↑ This is a pun, not a promise that you won't fall asleep)</small>
+					</p>
+				    <aside class="notes">
+				    </aside>
+				</section>
+
+				<section>
+					<h2>What's Going To Happen</h2>
+					<ul>
+						<li>What is Technical Debt?</li>
+						<li>What effects does <b>it</b> have?</li>
+						<li>How to recognize <b>it</b></li>
+						<li>How to avoid <b>it</b></li>
+						<li>When should you eliminate <b>it</b>?</li>
+					</ul>
+				    <aside class="notes">
+				    </aside>
+				</section>
+
+				<section>
+					<h2>What Is Technical Debt?</h2>
+					<blockquote cite="http://en.wikipedia.org/wiki/Technical_debt">
+						&ldquo;work that needs to be done before a particular job can be considered complete or proper&rdquo;
+					</blockquote>
+					<blockquote cite="http://www.techopedia.com/definition/27913/technical-debt">
+						&ldquo;a concept in programming that reflects the extra development work that arises when code that is easy to implement in the short run is used instead of applying the best overall solution&rdquo;
+					</blockquote>
+					<blockquote cite="http://stackoverflow.com/questions/1258775/what-is-technical-debt">
+						&ldquo;a debt that you incur everytime you avoid doing the right thing (like refactoring, removing duplication/redundancy) letting the code quality deteriorate over time&rdquo;
+					</blockquote>
+					<blockquote cite="http://stackoverflow.com/questions/1258775/what-is-technical-debt">
+						&ldquo;if you cut corners in the short-term, you’re basically borrowing against the future maintainability of the software and that at some point, not unlike a credit card&rdquo;
+					</blockquote>
+				    <aside class="notes">
+				    	As you can see, it's hardly the world's most precisely defined topic
+				    </aside>
+				</section>
+
+				<section>
+					<h2>What Is Technical Debt?</h2>
+					<blockquote>
+						&ldquo;Code design that negatively affects the amount of effort it would take to implement a new feature.&rdquo;
+					</blockquote>
+					Me - Just now
+				    <aside class="notes">
+				    </aside>
+				</section>
+
+				<section>
+					<h2>Explaining The Metaphor</h2>
+					<p>The 'debt' metaphor is appropriate because technical debt behaves like monetary debt; the longer you leave technical debt around, the more engineering effort is needed to pay it back.
+					Your original debt incurs interest and needs more money to pay the whole debt off.</p>
+					<p>A few appropriate lessons can be extended from the metaphor:</p>
+					<ul>
+						<li>Paying off a debt earlier is cheaper</li>
+						<li>It's preferable to not be in debt</li>
+						<li>.... but sometimes it is a good business decision to incur debt for a specific purpose</li>
+					</ul>
+				    <aside class="notes">
+				    	So developers do need to be accepting when a product owner asks you to rush a feature, so long as they are aware of what they're getting themselves into (which they should if they watch this presentation)
+				    </aside>
+				</section>
+
+				<section>
+					<h2>What effects does it have?</h2>
+					<ul>
+						<li>Increases likelyhood of bugs being introduced</li>
+						<li>Slows down development</li>
+						<li>Encourages sloppyness</li>
+						<li>Demotivates developers</li>
+						<li>Makes it harder for new starters to understand the code, clean code is clear code</li>
+						<li>Can generate bad feeling between teams working on the same code-base</li>
+					</ul>
+				    <aside class="notes">
+				    	1.
+				    	2. causes stories to be estimated with more points (Prodct Owners take note!)
+				    	3. 'broken windows theory', if this code is bad why should I bother writing nice clean code here
+				    	4.  This is one that is often not considered but if the product doesn't feel neat or clean, not so much fun to work on, less motivated.
+				    	5.
+				    	6. Making the concept of Technical Debt understood means that people will be more accpeting of TD-laden code from other teams if they know that that TD has been undertaken with knowledge of the consequences. Without it teams can easily blame other teams for writing bad code.
+
+				    	Non-developers think of it like having a clean desk and a nice filing system when your code is clean compared to a desk where you can barely see the surface because it's covered in all sorts of jumbled papers.
+				    </aside>
+				</section>
+
+				<section>
+					<h2>How to recognize it?</h2>
+					<ul>
+						<li>Coding a feature takes alot longer than expected</li>
+						<li>Intuitive 'feeling' or knowing that a feature could be coded a lot faster if the code was designed in a different way</li>
+						<li>People groan when they have to change a certain source file</li>
+					</ul>
+				    <aside class="notes">
+				    	Generally developers will 'know'
+				    </aside>
+				</section>
+
+				<section>
+					<h2>How to recognize it?</h2>
+					<ul>
+						<pre><code>
+if (thing === "some string") {
+	...
+} else {
+	...
+}
+						</code></pre>
+						expanding to
+						<pre><code>
+if (thing === "some string") {
+	...
+} else if (thing === "some other string") {
+	...
+} else {
+	...
+}
+						</code></pre>
+					</ul>
+				    <aside class="notes">
+				    	This is one example of the kind of quick fix that Technical Debt looks like. Adding more special cases rather than using polymorphism etc
+				    </aside>
+				</section>
+
+				<section>
+					<h2>How to avoid it?</h2>
+					<ul>
+						<li>Look ahead</li>
+						<li>Code reviews</li>
+						<li>Pair programming</li>
+						<li>Care about it</li>
+					</ul>
+				    <aside class="notes">
+				    	1. You don't want to over-engineer solutions but especially by looking at the backlog you can anticipate what directions the code may expand in.
+				    	2. Knowing that someone else will be looking at your code really helps you be more disciplined
+				    	3. Like instantaneous code reviews
+				    </aside>
+				</section>
+
+				<section>
+					<h2>When should you deal with it?</h2>
+					<p>Try to avoid it in the first place! (some will creep in anyway)</p>
+					<ul>
+						<li>"If we all checked-in our code a little cleaner than when we checked it out, the code simply could not rot" - Robert C. Martin (Clean Code)</li>
+						<li>Create separate Technical Debt tasks (JIRA has them in a separate category, like Story, Bug etc)</li>
+					</ul>
+				    <aside class="notes">
+				    	1. when coding a feature if you touch any code that has technical debt in it, then clean it up (make sure to consider this when estimating stories).
+				    	2. Then do these with Product Owner approval, perhaps when stories in sprint are finished. This is the current approach in my team. Either drag them in when sprint ended early or Do them with a new story that will immediately use them.
+				    	Some debt creeping in is somewhat inevitable as requirements may change in an unexpected direction.
+				    	Sometimes worth bringing in in advance of doing a story which will take advantage of the refactoring
+				    </aside>
+				</section>
+ 	
+				<section>
+					<img src="segway.jpg" height="600px">
+					<aside class="notes">
+						As mentioned, you can clean up as you go and you can have it as part of your Definition of Done that there should be no (obiovus) technical debt, which segues me very smoothly into...
+					</aside>
+				</section>
+
+				<section>
+					<h1>The Definition(s) of Done</h1>
+				    <aside class="notes">
+				    </aside>
+				</section>
+
+				<section>
+					<h2>What's Going To Happen</h2>
+					<ul>
+						<li>What is a Definition of Done?</li>
+						<li>Things that tend to be on <b>one</b></li>
+						<li>How does <b>it</b> help?</li>
+						<li>How to make <b>one</b></li>
+						<li>When to change <b>it</b></li>
+					</ul>
+				    <aside class="notes">
+				    </aside>
+				</section>
+
+				<section>
+					<h2>What is a Definition of Done?</h2>
+						Firstly, you can have a Definition of Done for various levels:
+						<ul>
+							<li>Story</li>
+							<li>Sprint</li>
+							<li>Release to Staging</li>
+							<li>Release to Live</li>
+						</ul>
+				    <aside class="notes">
+				    	It's most often used to refer to Stories.
+				    	You need to be clear which level your definiton of done refers too. It's also useful to have different DoDs for different levels.
+				    </aside>
+				</section>
+
+				<section>
+					<h2>What is a Definition of Done?</h2>
+						A list of things which must be completed for a Story (Sprint, Release etc) to be considered absolutely finished.
+				    <aside class="notes">
+				    	Without getting too fuzzy it's somewhat self defining. You can't say "it's everything that's required to make a story releasable" because that may be part of your definition of sprint rather than for a story.
+				    	With regards to stories, it's very related to the concept of not giving credit (Story points towards the velocity) for work that is partially done, and it is the Definiton of Done that should be used to clarify whether a story is "Done" or not.
+				    </aside>
+				</section>
+
+				<section>
+					<h2>Things that tend to be on one (for a Story)</h2>
+						<ul>
+							<li>Unit tested</li>
+							<li>Integration tested</li>
+							<li>System tested</li>
+							<li>Design approved</li>
+							<li>Code reviewed</li>
+							<li>Technical Debt free</li>
+						</ul>
+				    <aside class="notes">
+				    	It's important to consider what is NOT on your Definition of Done for a Story and whether they are explicitly left out or just not thought of yet.
+				    	Generally, there tend to be cross-cutting concerns, which really help with the Scrum goal of releasable software at the end of every sprint.
+				    </aside>
+				</section>
+
+				<section>
+					<h2>Things that tend to be on one (for a Release)</h2>
+						<ul>
+							<li>Performance tested</li>
+							<li>Full security tested</li>
+							<li>Disaster recovery tested</li>
+							<li>Documentation written</li>
+							<li>User guide written</li>
+						</ul>
+				    <aside class="notes">
+				    	Now there's nothing to stop you doing these things at a lower level, eg Sprint or Story but generally things which are automatable (and therefore take little worker-time to do) tend to move down Definitions of Done from larger things (Releases) to smaller things (Sprints) and things which aren't automatable and take alot of time tend to stick in the Release level.
+				    </aside>
+				</section>
+
+				<section>
+					<h2>An example</h2>
+						<ul>
+							<li>Has the story been reviewed by another developer?</li>
+							<li>Have UI changes been reviewed by the designer?</li>
+							<li>Has story been reviewed by PO?</li>
+							<li>Can the story be demonstrated?
+							<li>Have the security and privacy implications of the change been assessed and noted down in the security overview?
+							<li>Have you considered the effect of any migrations you have written on pre-existing code using the data before the migration?</li>
+							<li>Has the story been tested by a QA Engineer?</li>
+							<li>Has all new text in the app been translated into all supported languages</li>
+						</ul>
+				    <aside class="notes">
+				    	As you can see from the example, some things aren't applicable for all storied, eg an entirely backend story won't require new text to be translated or UI changes to be approved but the definition of done should be a superset of all required stages for all different types of stories.
+				    </aside>
+				</section>
+
+				<section>
+					<h2>How does it help?</h2>
+						<ul>
+							<li class="fragment">Gives a defined, shared understanding of whether a story is done</li>
+							<li class="fragment">Makes it clear what is left to do</li>
+							<li class="fragment">Stops there being "hidden" work</li>
+							<li class="fragment">A statement of intent for the team and what they value</li>
+							<li class="fragment">Removes the need for "hardening" sprints</li>
+							<li class="fragment">Shows you where speed ups can occur</li>
+							<li class="fragment">Makes it clear what PO can and can't expect from a story</li>
+						</ul>
+				    <aside class="notes">
+				    	1. Stops different people giving different answers, eg ask developer yes it's done, QA: no it's not done
+				    	2. Rather than saying "it's 90% done we've just got to do the other 90%" you can be clearer and say which specific tasks still need to be done. As an aside, estimation of the seperate tasks form the DoD put together will be more accurate than estimation of the whole story not broken down.
+				    	3. People don't spend time doing mysterious undefined work which happens between a feature being coded and it being "done"
+				    	4. Inclusion or not of various levels of testing show what trade-offs the team has agreed to make
+				    	5. Kind of depends on what's in the DoD but a typical DoD for a story would be that it is production ready so there shouldn't be a need to "tidy" loose thing up.
+				    	6. Showing all the things that need to do "done" for a story makes it clear which things you can start earlier, eg writing integration tests in parallel with the code
+				    </aside>
+				</section>
+
+				<section>
+					<h2>How to make one</h2>
+						Look online for examples to get you started or refer to the one shown earlier.
+						<br>
+						Involve the whole team.
+				    <aside class="notes">
+				    	As it is the team which has to do the work which satisfies the definition of done, it is important that they have a large say on what is on it. This includes the Product Owner. Some things may be dictated externally such as regulations or a company wide policy of code coverage.
+				    </aside>
+				</section>
+
+				<section>
+					<h2>How to make one</h2>
+						What about multiple teams?
+						<br>
+						Shared helps but need team to agree
+				    <aside class="notes">
+				    	It is useful for multiple teams working on the same product to have the same definiton of done so that features committed from different teams have the same standards of testing/techincal debt etc, otherwise the whole product is brought down to the lowest level. But it is the teams themselves which have to produce work according to the definiton of done so each team must agree AND have the capability to adhere to the definition of done. For example if you have "Must be integration tested by a QA specialist" in your DoD then every team which adheres to that DoD must have a QA specialist available. Now sometimes this isn't going to be possible but going through the process of defining your Definiton of Done or even an ideal Definition of Done gives you a goal to move towards in terms of transitioning a team to Agile. It's important that the ideal Definition of Done doesn't get confused with the actual Definition of Done. You don't want the team having impossible things to do on the definition of done because this is unmotivating and will lead to other parts of the definition of done (which are in their control) being neglected.
+				    	As mentioned in the Techincal debt section, having a shared agreement of what state features are going to be in helps reduce antagonism between teams.
+				    </aside>
+				</section>
+
+				<section>
+					<h2>When to change it</h2>
+						Should be kept up-to-date, retrospectives are a good place to get feedback on it.
+						<br>
+						But you do want it to settle
+				    <aside class="notes">
+				    	If it changes too often then you lose part of the shared understanding and stakeholders will no longer think they can rely on it.
+				    	Saving the debate on whether you should create stories for things that aren't features for the user for another day, you may want to create stories that enable you to move items from the Definitions of Done down a level. Eg at the moment, integration testing isn't automated so is too much effort to be done for each story so is only on Definition of Release, once automated, could be moved down to Definition of Sprint/Story.
+				    	With multiple teams, the Scrum of Scrums may be a useful venue for aggregating the feedback from various teams and agreeing to any changes, but ideally any changes should be agreed on by all team members not just those present in the Scrum of Scrums
+				    </aside>
+				</section>
+
+				<section>Misc</h2>
+						<ul>
+							<li>Definition of Ready</li>
+						</ul>
+				    <aside class="notes">
+				    	1. So as you use and enjoy the advantages of the Defintion of Done, you often look to see where else you could apply the approach and one area is the "Definition of Ready". This is when a Story is ready for grooming by the team. Again this could happen at various levels, eg ready for grooming an Epic, or ready for grooming a Story potentially to be in the next sprint. Examples of things which could be on such lists are, QA System level test cases written, Design wireframes drawn up...
+				    </aside>
+				</section>
+
+				<section>
+					<h2>Takeaways</h2>
+					Technical Debt
+					<ul>
+						<li>Developers - Incurring debt can be a sensible business decision</li>
+						<li>Product Owners - Paying off your debt will allow you to get more features done, faster</li>
+					</ul>
+					Definition of Done
+					<ul>
+						<li>Important to note what is NOT in the Definiton of Done but has been thought of</li>
+						<li>Can really set the tone of what standards are expected in Engineering</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Questions?</h2>
+					<ul>
+						<li>?????</li>
+						<li>?</li>
+						<li>???</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

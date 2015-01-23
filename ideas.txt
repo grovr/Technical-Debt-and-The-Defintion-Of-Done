@@ -1,0 +1,39 @@
+Examples: Filters in Overlay Engine, SMS Overlay
+Different ways to accumulate it, rushing something or slow build up
+
+What is it?
+
+"work that needs to be done before a particular job can be considered complete or proper"
+"a concept in programming that reflects the extra development work that arises when code that is easy to implement in the short run is used instead of applying the best overall solution"
+"a debt that you incur everytime you avoid doing the right thing (like refactoring, removing duplication/redundancy) letting the code quality deteriorate over time"
+"cut corners in the short-term, you’re basically borrowing against the future maintainability of the software and that at some point, not unlike a credit card"
+Something that negatively effects the amount of effort it would take to implement a new feature.
+Product Owners should care! Technical Debt doesn't affect the amount of story points that can be done in a sprint, but it makes stories have more points - which means less features get done!
+
+Example: SMS Overlay
+For visit of Jim Sorenson we wanted to demonstrate an overlay where you put your number into an overlay and get a text with a voucher code. Only had 3 days to implement which would be too risky to rush a server side release and push to live by then, instead we built the sms sending code into the client side overlay. Cost of client side or server side implementations for the inital requirements is about the same. We then had future stories about sending impressions when we send an sms and rate limiting the sms sending. To do this client side would have been about 8 points so instead we did a 3 point story to implement the basic functionality server side and then the additional functionality was only 5 points ( 3 points less than it would have been client side ). This difference between client and server side implementations will continue to exist in future stories with other capabilities.
+
+Example: Filters in Overlay Engine
+So generally we get a request for an overlay and we have a number of reason why we may not want to server a particular overlay to someone, eg the overlay has reached it's end date, the overlay is restricted to a geographical area that the request isn't coming from.
+
+What effects does it have?
+Slows down development - causes stories to be estimated with more points
+Encourages sloppyness - 'broken windows theory', if this code is bad why should I bother writing nice clean code here
+Demotivates developers - Product doesn't feel neat or clean
+
+How to recognize it?
+Coding a feature takes alot longer than expected
+Either 'feel' or know that a feature could be coded a lot faster if the code was designed in a different way
+
+When to deal with it?
+Try to avoid it in the first place!
+Few options:
+"If we all checked-in our code a little cleaner than when we checked it out, the code simply could not rot" - Robert C. Martin (Clean Code) - when coding a feature if you touch any code that has technical debt in it, then clean it up (make sure to consider this when estimating stories)
+Create separate Technical Debt tasks (JIRA has them in a separate category) - then do these with Product Owner approval, perhaps when stories in sprint are finished
+
+How to avoid it?
+Look ahead, don't want to over-engineer solutions but especially by looking at the backlog you can anticipate what directions the code may expand in
+Code reviews, knowing that someone else will be looking at your code really helps you be more disciplined
+Pair programming - like instantaneous code reviews
+
+Code that's easier to understand is easier to explain. New hires can start being productive quicker
